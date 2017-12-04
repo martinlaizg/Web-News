@@ -1,16 +1,20 @@
 {
-  "name": "web-news",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+	"name": "web-news",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"axios": "^0.17.1",
+		"material-ui": "^0.19.4",
+		"react": "^16.2.0",
+		"react-dom": "^16.2.0",
+		"react-scripts": "1.0.17",
+		"react-tap-event-plugin": "^3.0.2",
+		"wolfy87-eventemitter": "^5.2.4"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject"
+	}
 }
