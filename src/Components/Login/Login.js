@@ -16,8 +16,8 @@ class Login extends Component {
 			password: this.passwordCampo.value
 		})
 		let data = JSON.stringify({
-			username: this.state.username,
-			password: this.state.password
+			username: this.usernameCampo.value,
+			password: this.passwordCampo.value
 		})
 		fetch('http://localhost:5000/login', {
 			method: 'POST',
@@ -30,6 +30,7 @@ class Login extends Component {
 			return response.json()
 		})
 		.then((response) => {
+			console.log(response)
 			if(response.token) {
 				localStorage.setItem('token', response.token)
 				localStorage.setItem('username', this.state.username)
@@ -60,7 +61,7 @@ class Login extends Component {
 						<strong>Login incorrecto</strong>
 					</div>
 				}
-				<label htmlFor="token">{this.state.token}</label>
+				<label htmlFor="token">{localStorage.token}</label>
 			</div>
 		)
 	}
