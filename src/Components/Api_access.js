@@ -7,28 +7,53 @@ class Api_access {
 	getCategories() {
 		return fetch(this.url + '/categories').then(response => response.json())
 	}
+
 	createCategory(name) {
-		fetch(this.url + '/categories', {
+		return fetch(this.url + '/categories', {
 			method: 'POST',
 			headers: {
-				'Content-Type' : 'application/json'
+				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({name : name})
+			body: JSON.stringify({ name })
 		})
-		.then(response => response.json())
+			.then(response => { return response.json() })
 	}
-    /*addItem(item) {
-        return fetch(this.API_URL, {
-                   method: 'POST',
-                   headers: {
-                       'Content-type':'application/json'
-                   },
-                   body: JSON.stringify(item)
-               }).then(function (respuesta) {
-                   if (respuesta.ok)
-                      return respuesta.json()
-               })
-    }*/
+
+	deleteCategory(category) {
+		return fetch(this.url + '/categories/' + category, {
+			method: 'delete',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': localStorage.token
+			}
+		})
+			.then(response => { console.log(response) })
+	}
+
+	login(user) {
+		return fetch(this.url + '/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(user)
+		}).then(response => {
+			return response.json()
+		})
+	}
+
+	signup(user) {
+		console.log(user)
+		return fetch(this.url + '/signup', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(user)
+		}).then(response => {
+			return response.json()
+		})
+	}
 }
 
 export default Api_access

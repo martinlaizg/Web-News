@@ -3,3 +3,14 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.category-item {
+	padding-right: 15px;
+}
+
+.dropdown-input {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+  
