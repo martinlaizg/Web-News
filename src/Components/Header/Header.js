@@ -9,15 +9,16 @@ class Header extends Component {
 				No categories
 				</div>
 		}
-		else {
+		else if (this.props.categories) {
 			categoriesList = this.props.categories.map((category, index) => {
 				return <div className='dropdown-item' key={index}>
-					<a className='category-item'>{category.name}   </a>
-					<button className='btn btn-danger' onClick={() => { this.props.deleteCategory(category._id) }}><img src="/svg/trashcan.svg" alt="Delete" /></button>
+					<a className='category-item'>{category.name}</a>
+					{localStorage.token !== 'null' ?
+						<button className='btn btn-danger' onClick={() => { this.props.deleteCategory(category._id) }}><img src="/svg/trashcan.svg" alt="Delete" /></button>
+						: null}
 				</div>
 			})
 		}
-
 
 		return (
 			<div>
