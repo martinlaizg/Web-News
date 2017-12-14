@@ -5,7 +5,7 @@ class Api_access {
 	}
 
 	getCategories() {
-		return fetch(this.url + '/categories').then(response => response.json())
+		return fetch(this.url + '/categories').then(response => response.json()).catch(err => { return err })
 	}
 
 	createCategory(name) {
@@ -15,8 +15,7 @@ class Api_access {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({ name })
-		})
-			.then(response => { return response.json() })
+		}).then(response => { return response.json() }).catch(error => { return error })
 	}
 
 	deleteCategory(category) {
@@ -26,8 +25,7 @@ class Api_access {
 				'Content-Type': 'application/json',
 				'Authorization': localStorage.token
 			}
-		})
-			.then(response => { console.log(response) })
+		}).then(response => { return response.json() }).catch(err => { return err })
 	}
 
 	login(user) {
@@ -37,22 +35,17 @@ class Api_access {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(user)
-		}).then(response => {
-			return response.json()
-		})
+		}).then(response => { return response.json() }).catch(err => { return err })
 	}
 
 	signup(user) {
-		console.log(user)
 		return fetch(this.url + '/signup', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(user)
-		}).then(response => {
-			return response.json()
-		})
+		}).then(response => { return response.json() }).catch(err => { return err })
 	}
 }
 
