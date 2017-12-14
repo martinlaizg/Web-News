@@ -1,7 +1,7 @@
 
 class Api_access {
 	constructor() {
-		this.url = 'https://api-news-martinlaiz.herokuapp.com/'
+		this.url = 'https://api-news-martinlaiz.herokuapp.com'
 	}
 
 	getCategories() {
