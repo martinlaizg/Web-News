@@ -92,9 +92,13 @@ class App extends Component {
 		this.setState({ categories })
 	}
 
+	deleteNotice = (noticeId) => {
+		new Api_access().deleteNotice(noticeId).then(() => this.setState({path: 'notices'}))
+	}
+
 	render() {
 		var content = <Container path={this.state.path} newCategory={this.newCategoryHandler}
-			categories={this.state.categories} changePath={this.changePath} />
+			categories={this.state.categories} changePath={this.changePath} deleteNotice={this.deleteNotice}/>
 		if (this.state.path === 'signup' && localStorage.token === 'null') {
 			content = <Signup signup={this.signup} />
 		}

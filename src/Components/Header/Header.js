@@ -6,16 +6,16 @@ class Header extends Component {
 		var categoriesList = null
 		if (this.props.categories.length === 0) {
 			categoriesList = <div className='alert alert-danger' role='alert'>
-					No hay noticias
+				No hay categorias
 				</div>
 		}
 		else if (this.props.categories) {
 			categoriesList = this.props.categories.map((category, index) => {
 				return <div className='dropdown-item' key={index}>
-					<a className='category-item'>{category.name}</a>
 					{localStorage.token !== 'null' ?
 						<button className='btn btn-danger' onClick={() => { this.props.deleteCategory(category._id) }}><img src='/svg/trashcan.svg' alt='Delete' /></button>
 						: null}
+						<a className='category-item'>  {category.name}</a>
 				</div>
 			})
 		}
@@ -50,7 +50,7 @@ class Header extends Component {
 						</div>
 					</li>
 					{localStorage.token !== 'null' ?
-						<li className='nav-item dropdown'>
+						<li className='nav-item'>
 							<a className='nav-link  text-white' onClick={() => this.props.changePath('newNotice')}>Add notice</a>
 						</li> : null
 					}
@@ -65,11 +65,11 @@ class Header extends Component {
 							<li className='nav-item dropdown form-inline'>
 								<a className='nav-link dropdown-toggle text-white' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
 									Login
-						</a>
-								<div className='dropdown-menu' aria-labelledby='navbarDropdown'>
+								</a>
+								<div className='dropdown-menu dropdown-menu-right' aria-labelledby='navbarDropdown'>
 									<input ref={campo => this.usernameLogin = campo} className='dropdown-item form-control form-control-sm' type='text' placeholder='Username' />
 									<input ref={campo => this.passwordLogin = campo} className='dropdown-item form-control form-control-sm' type='password' placeholder='Password...' />
-									<button className='btn btn-primary btn-block' onClick={() => this.props.loginHandler(this.usernameLogin.value, this.passwordLogin.value)}>Search</button>
+									<button className='btn btn-primary btn-block' onClick={() => this.props.loginHandler(this.usernameLogin.value, this.passwordLogin.value)}>Log in</button>
 								</div>
 							</li>
 							<li className='nav-item form-inline'>

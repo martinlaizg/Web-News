@@ -25,6 +25,10 @@ class Container extends Component {
 		new Api_acces().newNotice(notice).then(this.loadNotices())
 	}
 
+	updateNotice = (id, notice) => {
+		new Api_acces().updateNotice(id, notice).then(this.loadNotices())
+	}
+
 	render() {
 		var elements = null
 		if (this.props.path === 'newNotice') {
@@ -43,7 +47,9 @@ class Container extends Component {
 							<div className='card-body'>
 								<h4 className='card-title'><a onClick={() => { this.props.changePath('notice:' + notice._id) }}>{notice.title}</a></h4>
 								<p className='card-text'>{notice.description}</p>
-								<span className="badge badge-secondary">{notice.category ? notice.category.name : 'Sin categorizar'}</span>
+								<div className='row justify-content-between'>
+									<span className="badge badge-secondary">{notice.category ? notice.category.name : 'Sin categorizar'}</span>
+								</div>
 							</div>
 						</div>)
 					})}
@@ -51,9 +57,16 @@ class Container extends Component {
 			}
 		}
 		else if (this.props.path.startsWith('notice:')) {
-			elements = <Notice id={this.props.path.split(':')[1]} />
+			elements = <Notice id={this.props.path.split(':')[1]} type='notice' categories={this.props.categories}
+			changePath={this.props.changePath} updateNotice={this.updateNotice}/>
 		}
-
+		else if (this.props.path.startsWith('update:')) {
+			elements = <Notice id={this.props.path.split(':')[1]} type='update' categories={this.props.categories}
+			changePath={this.props.changePath} updateNotice={this.updateNotice}/>
+		}
+		else {
+			elements = <div>Operación no permitida</div>
+		}
 		return (
 			<div>
 				{elements}
