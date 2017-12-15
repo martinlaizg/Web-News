@@ -14,7 +14,7 @@ class App extends Component {
 		this.state = {
 			categories: [],
 			logged: (localStorage.token !== 'null'),
-			path: null,
+			path: 'notices',
 			error: null
 		}
 	}
@@ -24,7 +24,7 @@ class App extends Component {
 	}
 
 	changePath = (path) => {
-		this.setState({ path })
+		this.setState({ path: path })
 	}
 
 	login = (username, password) => {
@@ -93,7 +93,8 @@ class App extends Component {
 	}
 
 	render() {
-		var content = <Container />
+		var content = <Container path={this.state.path} newCategory={this.newCategoryHandler}
+			categories={this.state.categories} changePath={this.changePath} />
 		if (this.state.path === 'signup' && localStorage.token === 'null') {
 			content = <Signup signup={this.signup} />
 		}

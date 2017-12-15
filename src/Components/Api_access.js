@@ -1,7 +1,7 @@
 
 class Api_access {
 	constructor() {
-		this.url = 'https://api-news-martinlaiz.herokuapp.com'
+		this.url = 'http://localhost:5000'//'https://api-news-martinlaiz.herokuapp.com'
 	}
 
 	getCategories() {
@@ -45,6 +45,36 @@ class Api_access {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(user)
+		}).then(response => { return response.json() }).catch(err => { return err })
+	}
+
+	getNotices() {
+		return fetch(this.url + '/notices', {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		}).then(response => { return response.json() }).catch(err => { return err })
+	}
+
+	newNotice(notice) {
+		return fetch(this.url + '/notices', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'Authorization': localStorage.token
+			},
+			body: JSON.stringify(notice)
+		}).then(response => { return response.json() }).catch(err => { return err })
+	}
+
+	getNotice(id) {
+		console.log(id)
+		return fetch(this.url + '/notices/' + id, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
 		}).then(response => { return response.json() }).catch(err => { return err })
 	}
 }

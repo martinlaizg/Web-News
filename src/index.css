@@ -16,3 +16,7 @@ body {
 .alert {
 	margin-top: 20px;
 }
+
+.notice-text {
+	white-space: pre-line;
+}
