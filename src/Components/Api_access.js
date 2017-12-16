@@ -1,8 +1,8 @@
 
 class Api_access {
 	constructor() {
-		this.url = 'http://localhost:5000'
-		//this.url = 'https://api-news-martinlaiz.herokuapp.com'
+		//this.url = 'http://localhost:5000'
+		this.url = 'https://api-news-martinlaiz.herokuapp.com'
 	}
 
 	getCategories() {
