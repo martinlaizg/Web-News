@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 
 import Api_acces from './Api_access'
 import Notice from './Notice/Notice'
-import NoticeForm from './Notice/NoticeForm'
 
 class Container extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			notices: [],
-			path: null
+			notices: []
 		}
 	}
 
@@ -18,11 +16,21 @@ class Container extends Component {
 	}
 
 	loadNotices = () => {
-		new Api_acces().getNotices().then(response => this.setState({ notices: response.notices }))
+		new Api_acces().getNotices().then(response => this.setState({ notices: response.notices}))
+		this.props.changePath('notices')
 	}
 
 	newNotice = (notice) => {
 		new Api_acces().newNotice(notice).then(this.loadNotices())
+	}
+
+	deleteNotice = (id) => {
+		new Api_acces().deleteNotice(id).then(response => {
+			if(response.messaje !== 'Noticia borrada') {
+				this.props.setError(response.messaje)
+			}
+			this.loadNotices()
+		})
 	}
 
 	updateNotice = (id, notice) => {
@@ -31,10 +39,7 @@ class Container extends Component {
 
 	render() {
 		var elements = null
-		if (this.props.path === 'newNotice') {
-			elements = <NoticeForm newNotice={this.newNotice} categories={this.props.categories} />
-		}
-		else if (this.props.path === 'notices') {
+		if (this.props.path === 'notices') {
 			if (this.state.notices.length === 0) {
 				elements = <div className="alert alert-danger" role="alert">
 					No hay noticias
@@ -58,11 +63,15 @@ class Container extends Component {
 		}
 		else if (this.props.path.startsWith('notice:')) {
 			elements = <Notice id={this.props.path.split(':')[1]} type='notice' categories={this.props.categories}
-			changePath={this.props.changePath} updateNotice={this.updateNotice}/>
+				changePath={this.props.changePath} deleteNotice={this.deleteNotice} />
 		}
 		else if (this.props.path.startsWith('update:')) {
 			elements = <Notice id={this.props.path.split(':')[1]} type='update' categories={this.props.categories}
-			changePath={this.props.changePath} updateNotice={this.updateNotice}/>
+				changePath={this.props.changePath} updateNotice={this.updateNotice} deleteNotice={this.deleteNotice} />
+		}
+		else if (this.props.path.startsWith('create:')) {
+			elements = <Notice id={this.props.path.split(':')[1]} type='create' categories={this.props.categories}
+				changePath={this.props.changePath} newNotice={this.newNotice} />
 		}
 		else {
 			elements = <div>Operación no permitida</div>

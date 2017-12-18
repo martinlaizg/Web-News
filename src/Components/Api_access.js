@@ -70,7 +70,6 @@ class Api_access {
 	}
 
 	getNotice(id) {
-		console.log(id)
 		return fetch(this.url + '/notices/' + id, {
 			method: 'GET',
 			headers: {
@@ -80,7 +79,6 @@ class Api_access {
 	}
 
 	deleteNotice(id) {
-		console.log(id)
 		return fetch(this.url + '/notices/' + id, {
 			method: 'DELETE',
 			headers: {
@@ -98,8 +96,8 @@ class Api_access {
 				'Authorization': localStorage.token
 			},
 			body: JSON.stringify(notice)
-		}).then(response => console.log(response))
-		//}).then(response => { return response.json() }).catch(err => { return err })
+		//}).then(response => console.log(response))
+		}).then(response => { return response.json() }).catch(err => { return err })
 	}
 
 
