@@ -31,6 +31,7 @@ class App extends Component {
 		new Api_access().login({ username, password }).then(response => {
 			if (response.token) {
 				localStorage.token = response.token
+				localStorage.username = username
 				this.setState({
 					logged: (response.token !== 'null')
 				})
@@ -92,13 +93,15 @@ class App extends Component {
 		this.setState({ categories })
 	}
 
-	deleteNotice = (noticeId) => {
-		new Api_access().deleteNotice(noticeId).then(() => this.setState({path: 'notices'}))
+	setError = (error) => {
+		this.setState({
+			error: error
+		})
 	}
 
 	render() {
-		var content = <Container path={this.state.path} newCategory={this.newCategoryHandler}
-			categories={this.state.categories} changePath={this.changePath} deleteNotice={this.deleteNotice}/>
+		var content = <Container path={this.state.path} categories={this.state.categories}
+			changePath={this.changePath} setError={this.setError}/>
 		if (this.state.path === 'signup' && localStorage.token === 'null') {
 			content = <Signup signup={this.signup} />
 		}

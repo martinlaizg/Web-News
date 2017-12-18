@@ -15,7 +15,7 @@ class Header extends Component {
 					{localStorage.token !== 'null' ?
 						<button className='btn btn-danger' onClick={() => { this.props.deleteCategory(category._id) }}><img src='/svg/trashcan.svg' alt='Delete' /></button>
 						: null}
-						<a className='category-item'>  {category.name}</a>
+					<a className='category-item'>  {category.name}</a>
 				</div>
 			})
 		}
@@ -29,7 +29,7 @@ class Header extends Component {
 			<div className='collapse navbar-collapse' id='navbarSupportedContent'>
 				<ul className='navbar-nav mr-auto'>
 					<li className='nav-item'>
-						<a className='nav-link  text-white' onClick={() => this.props.changePath('notices')}>Notices</a>
+						<a className='nav-link text-white' onClick={() => this.props.changePath('notices')}>Notices</a>
 					</li>
 					<li className='nav-item dropdown'>
 						<a className='nav-link dropdown-toggle text-white' id='navbarDropdown' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>Categories</a>
@@ -51,15 +51,21 @@ class Header extends Component {
 					</li>
 					{localStorage.token !== 'null' ?
 						<li className='nav-item'>
-							<a className='nav-link  text-white' onClick={() => this.props.changePath('newNotice')}>Add notice</a>
+							<a className='nav-link  text-white' onClick={() => this.props.changePath('create:')}>Add notice</a>
 						</li> : null
 					}
 				</ul>
-				<div className='my-2 my-lg-0'>
+				<div className='my-2 my-lg-0 login-header'>
 					{localStorage.token !== 'null' ?
-						<li className='nav-item'>
-							<button className='btn btn-danger' onClick={this.props.logoutHandler}>Logout</button>
-						</li>
+						<div className='row'>
+							<li className='nav-item nav-link text-white'>
+								{localStorage.username}
+							</li>
+							<li className='nav-item form-inline'>
+								<button className='nav-link btn btn-danger' onClick={this.props.logoutHandler}>Logout</button>
+							</li>
+						</div>
+
 						:
 						<div className='row'>
 							<li className='nav-item dropdown form-inline'>
