@@ -47,6 +47,7 @@ class App extends Component {
 
 	logout = () => {
 		localStorage.token = null
+		localStorage.username = null
 		this.setState({
 			logged: (localStorage.token !== 'null')
 		})
